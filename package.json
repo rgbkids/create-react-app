@@ -32,7 +32,8 @@
     "pm2:server:stop": "pm2 stop server-app",
     "pm2:server:restart": "pm2 restart server-app",
     "pm2:server:delete": "pm2 delete server-app",
-    "pm2:server:logs": "pm2 logs server-app"
+    "pm2:server:logs": "pm2 logs server-app",
+    "pm2:list": "pm2 list"
   },
   "eslintConfig": {
     "extends": [
