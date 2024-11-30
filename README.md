@@ -43,6 +43,35 @@ npm run build
 npm run eject
 ```
 
+- Start the backend server.
+
+```bash
+node src/server.js
+```
+
+ex: 
+
+```
+% curl -X POST http://localhost/file -H "Content-Type: application/json" -d '{
+  "filepath": "pages/1/App.tsx", 
+  "content": "This is a test file"
+}' -k
+
+{"message":"File written successfully."}%   
+```
+
+```
+% curl -X GET "http://localhost/file?filepath=pages/1/App.tsx" -k
+
+{"content":"This is a test file"}%                           
+```
+
+```
+% curl -X GET "http://localhost/directory?dirPath=." -k   
+
+{"contents":[{"name":"App.css","type":"file"},{"name":"App.test.tsx","type":"file"},{"name":"App.tsx","type":"file"},{"name":"DynamicApp.tsx","type":"file"},{"name":"index.css","type":"file"},{"name":"index.tsx","type":"file"},{"name":"logo.svg","type":"file"},{"name":"pages","type":"directory","contents":[{"name":".gitkeep","type":"file"},{"name":"1","type":"directory","contents":[{"name":"App.tsx","type":"file"}]},{"name":"2","type":"directory","contents":[{"name":"App.tsx","type":"file"}]},{"name":"4","type":"directory","contents":[{"name":"App.tsx","type":"file"}]},{"name":"5","type":"directory","contents":[{"name":"App.tsx","type":"file"}]},{"name":"6","type":"directory","contents":[{"name":"App.tsx","type":"file"}]}]},{"name":"react-app-env.d.ts","type":"file"},{"name":"reportWebVitals.ts","type":"file"},{"name":"server.js","type":"file"},{"name":"setupTests.ts","type":"file"}]}%  
+```
+
 ### React App Management (via PM2)
 
 - Starts the React app using PM2.
