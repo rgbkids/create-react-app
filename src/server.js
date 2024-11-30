@@ -2,6 +2,7 @@ const express = require('express');
 const fs = require('fs');
 const path = require('path');
 const https = require('https');
+const cors = require('cors');
 
 const app = express();
 const port = 80;
@@ -18,6 +19,18 @@ const httpsOptions = {
     cert: fs.readFileSync(path.join(sslDir, 'term-app.crt')),
     ca: fs.readFileSync(path.join(sslDir, 'term-app.ca-bundle')),
 };
+
+const allowedOrigins = ['http://localhost:3000', 'https://school.vteacher.biz'];
+
+app.use(cors({
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+}));
 
 app.post('/create/:id', (req, res) => {
     const { id } = req.params;
