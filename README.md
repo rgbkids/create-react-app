@@ -19,28 +19,20 @@ cp .env.sample .env
 
 ### Development and Build Scripts
 
-- Runs the app in development mode. Open [http://localhost:3000](http://localhost:3000).
-
-```bash
-npm start
-```
-
-- Runs tests in interactive watch mode.
-
-```bash
-npm test
-```
-
 - Builds the app for production to the `build` folder.
+
+```bash
+npm install
+```
 
 ```bash
 npm run build
 ```
 
-- Copies config files for full control (irreversible).
+- Runs the app in development mode. Open [http://localhost:3000](http://localhost:3000).
 
 ```bash
-npm run eject
+npm start
 ```
 
 - Start the backend server.
