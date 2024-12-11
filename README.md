@@ -91,3 +91,21 @@ npm run pm2:server:start
 ```bash
 npm run pm2:server:stop
 ```
+
+### Next.js Management (via PM2)
+
+```bash
+cd nextjs/app/
+```
+
+- Starts the server using PM2.
+
+```bash
+npm run pm2:nextjs:start
+```
+
+- Stops the server managed by PM2.
+
+```bash
+npm run pm2:nextjs:stop
+```
