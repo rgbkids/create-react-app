@@ -13,7 +13,7 @@ const httpsOptions = {
 const app = next({ dev: process.env.NODE_ENV !== 'production' });
 const handle = app.getRequestHandler();
 
-const port = 8080;
+const port = 3000;
 
 app.prepare().then(() => {
     createServer(httpsOptions, (req, res) => {

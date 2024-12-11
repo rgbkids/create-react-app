@@ -80,6 +80,10 @@ npm run pm2:app:stop
 
 ### Server Management (via PM2)
 
+`Case 1` OR `Case 2`
+
+#### Case 1: Express.js
+
 - Starts the server using PM2.
 
 ```bash
@@ -92,7 +96,7 @@ npm run pm2:server:start
 npm run pm2:server:stop
 ```
 
-### Next.js Management (via PM2)
+#### Case 2: Next.js
 
 ```bash
 cd nextjs/app/
