@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { NextResponse } from 'next/server';
 
-const baseNextjsDir = path.join(process.cwd(), 'app/');
+const baseNextjsDir = path.join(process.cwd(), '');
 
 export async function POST(req, { params }) {
     const { id } = params;
