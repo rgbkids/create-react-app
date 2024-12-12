@@ -45,13 +45,13 @@ app.post('/create/:id', (req, res) => {
 
     if (!fs.existsSync(filePath)) {
         const template = `
-import React from 'react';
-
-const App = () => {
-    return <h1>App ${id}</h1>;
-};
-
-export default App;
+export default function App() {
+  return (
+    <div>
+      <h1>App ${id}</h1>
+    </div>
+  );
+}
 `;
         fs.writeFileSync(filePath, template, 'utf8');
     }
@@ -71,10 +71,10 @@ app.post('/create/nextjs/:id', (req, res) => {
 
     if (!fs.existsSync(filePath)) {
         const template = `
-export default function Home() {
+export default function Page() {
   return (
     <div>
-      <h1>App ${id}</h1>
+      <h1>Page ${id}</h1>
     </div>
   );
 }
@@ -82,7 +82,7 @@ export default function Home() {
         fs.writeFileSync(filePath, template, 'utf8');
     }
 
-    res.status(200).send({ message: `App ${id} created.` });
+    res.status(200).send({ message: `Page ${id} created.` });
 });
 
 app.post('/file', (req, res) => {
