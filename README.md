@@ -99,7 +99,9 @@ ex: Next.js
 {"contents":[{"name":"page.tsx","type":"file"}]}%
 ```
 
-### API Server Management (via PM2)
+### Case 1: Express.js Management (via PM2)
+
+#### app
 
 - Starts the server using PM2.
 
@@ -113,11 +115,7 @@ npm run pm2:server:start
 npm run pm2:server:stop
 ```
 
-### React App Management (via PM2)
-
-`Case 1` OR `Case 2`
-
-#### Case 1: Express.js
+#### server
 
 - Starts the React app using PM2.
 
@@ -131,7 +129,7 @@ npm run pm2:app:start
 npm run pm2:app:stop
 ```
 
-#### Case 2: Next.js
+### Case 2: Next.js Management (via PM2)
 
 ```bash
 cd nextjs/app/
