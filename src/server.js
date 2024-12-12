@@ -11,6 +11,7 @@ const httpsPort = 443;
 app.use(express.json());
 
 const baseDir = path.join(__dirname, 'pages');
+const baseNextjsDir = path.join(__dirname, '../nextjs/app/src/app/');
 const HOME_DIR = path.join(__dirname, './');
 
 const sslDir = path.join(__dirname, '../ssl');
@@ -51,6 +52,32 @@ const App = () => {
 };
 
 export default App;
+`;
+        fs.writeFileSync(filePath, template, 'utf8');
+    }
+
+    res.status(200).send({ message: `App ${id} created.` });
+});
+
+app.post('/create/nextjs/:id', (req, res) => {
+    const { id } = req.params;
+
+    const dirPath = path.join(baseNextjsDir, id);
+    const filePath = path.join(dirPath, 'page.tsx');
+
+    if (!fs.existsSync(dirPath)) {
+        fs.mkdirSync(dirPath, { recursive: true });
+    }
+
+    if (!fs.existsSync(filePath)) {
+        const template = `
+export default function Home() {
+  return (
+    <div>
+      <h1>App ${id}</h1>
+    </div>
+  );
+}
 `;
         fs.writeFileSync(filePath, template, 'utf8');
     }
