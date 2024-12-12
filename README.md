@@ -41,9 +41,15 @@ npm start
 node src/server.js
 ```
 
-ex: 
+ex: Express.js 
 
+```bash
+% curl -X POST http://localhost/create/123 -H "Content-Type: application/json"
+
+{"message":"App 123 created."}%
 ```
+
+```bash
 % curl -X POST http://localhost/file -H "Content-Type: application/json" -d '{
   "filepath": "pages/1/App.tsx", 
   "content": "This is a test file"
@@ -52,16 +58,45 @@ ex:
 {"message":"File written successfully."}%   
 ```
 
-```
+```bash
 % curl -X GET "http://localhost/file?filepath=pages/1/App.tsx" -k
 
 {"content":"This is a test file"}%                           
 ```
 
-```
+```bash
 % curl -X GET "http://localhost/directory?dirPath=." -k   
 
 {"contents":[{"name":"App.css","type":"file"},{"name":"App.test.tsx","type":"file"},{"name":"App.tsx","type":"file"},{"name":"DynamicApp.tsx","type":"file"},{"name":"index.css","type":"file"},{"name":"index.tsx","type":"file"},{"name":"logo.svg","type":"file"},{"name":"pages","type":"directory","contents":[{"name":".gitkeep","type":"file"},{"name":"1","type":"directory","contents":[{"name":"App.tsx","type":"file"}]},{"name":"2","type":"directory","contents":[{"name":"App.tsx","type":"file"}]},{"name":"4","type":"directory","contents":[{"name":"App.tsx","type":"file"}]},{"name":"5","type":"directory","contents":[{"name":"App.tsx","type":"file"}]},{"name":"6","type":"directory","contents":[{"name":"App.tsx","type":"file"}]}]},{"name":"react-app-env.d.ts","type":"file"},{"name":"reportWebVitals.ts","type":"file"},{"name":"server.js","type":"file"},{"name":"setupTests.ts","type":"file"}]}%  
+```
+
+ex: Next.js
+
+```bash
+% curl -X POST https://www.vteacher.biz:3000/api/create/nextjs/123 -H "Content-Type: application/json"
+
+{"message":"Page 123 created."}%
+```
+
+```bash
+% curl -X POST https://www.vteacher.biz:3000/api/file -H "Content-Type: application/json" -d '{
+  "filepath": "src/app/123/page.tsx", 
+  "content": "export default function Page() {return (<div><h1>/api/file</h1></div>);}"
+}' -k
+
+{"message":"File written successfully."}%
+```
+
+```bash
+% curl -X GET "https://www.vteacher.biz:3000/api/file?filepath=src/app/123/page.tsx" -k
+
+{"content":"export default function Page() {return (<div><h1>/api/file</h1></div>);}"}%
+```
+
+```bash
+% curl -X GET "https://www.vteacher.biz:3000/api/directory?dirPath=./src/app/123/" -k   
+
+{"contents":[{"name":"page.tsx","type":"file"}]}%
 ```
 
 ### API Server Management (via PM2)
