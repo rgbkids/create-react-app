@@ -2,6 +2,8 @@ const { createServer } = require('https');
 const { parse } = require('url');
 const fs = require('fs');
 const next = require('next');
+const cors = require('cors');
+const express = require('express');
 
 const sslDir = '../../ssl/';
 const httpsOptions = {
@@ -15,11 +17,27 @@ const handle = app.getRequestHandler();
 
 const port = 3000;
 
+const server = express();
+
+const allowedOrigins = ['http://localhost:3000', 'https://school.vteacher.biz'];
+
+server.use(cors({
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+}));
+
 app.prepare().then(() => {
-    createServer(httpsOptions, (req, res) => {
+    server.all('*', (req, res) => {
         const parsedUrl = parse(req.url, true);
         handle(req, res, parsedUrl);
-    }).listen(port, (err) => {
+    });
+
+    createServer(httpsOptions, server).listen(port, (err) => {
         if (err) throw err;
         console.log(`> Ready on https://localhost:${port}`);
     });
