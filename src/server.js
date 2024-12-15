@@ -38,6 +38,7 @@ app.post('/create/:id', (req, res) => {
 
     const dirPath = path.join(baseDir, id);
     const filePath = path.join(dirPath, 'App.tsx');
+    const filePathComponent = path.join(dirPath, 'Component.tsx');
 
     if (!fs.existsSync(dirPath)) {
         fs.mkdirSync(dirPath, { recursive: true });
@@ -54,6 +55,19 @@ export default function App() {
 }
 `;
         fs.writeFileSync(filePath, template, 'utf8');
+    }
+
+    if (!fs.existsSync(filePathComponent)) {
+        const template = `
+export default function Component() {
+  return (
+    <div>
+      <h1>Component ${id}</h1>
+    </div>
+  );
+}
+`;
+        fs.writeFileSync(filePathComponent, template, 'utf8');
     }
 
     res.status(200).send({ message: `App ${id} created.` });
