@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const https = require('https');
 const cors = require('cors');
+const { exec } = require('child_process');
 
 const app = express();
 const port = 80;
@@ -181,6 +182,19 @@ app.get('/directory', (req, res) => {
     }
 
     res.json({ contents: directoryContents });
+});
+
+app.post('/run-setup', (req, res) => {
+    const port = req.body.port || '9999';
+    const scriptPath = '/root/create-react-app/nextjs/setup_app.sh';
+
+    exec(`bash ${scriptPath} ${port}`, (error, stdout, stderr) => {
+        if (error) {
+            console.error(`Error: ${stderr}`);
+            return res.status(500).json({ error: stderr });
+        }
+        res.json({ message: `Setup completed on port ${port}`, output: stdout });
+    });
 });
 
 https.createServer(httpsOptions, app).listen(httpsPort, () => {
