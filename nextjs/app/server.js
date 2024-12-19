@@ -15,7 +15,7 @@ const httpsOptions = {
 const app = next({ dev: process.env.NODE_ENV !== 'production' });
 const handle = app.getRequestHandler();
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 const server = express();
 
