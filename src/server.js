@@ -211,3 +211,41 @@ app.use((req, res, next) => {
     }
     next();
 });
+
+app.get('/file/exists', (req, res) => {
+    const { filepath } = req.query;
+
+    if (typeof filepath !== 'string' || filepath.trim() === '') {
+        return res.status(200).json({
+            success: false,
+            message: 'Filepath must be a non-empty string.',
+        });
+    }
+
+    const fullPath = path.join(HOME_DIR, filepath);
+
+    try {
+        const exists = fs.existsSync(fullPath);
+
+        if (exists) {
+            return res.status(200).json({
+                success: true,
+                exists: true,
+                message: `The file '${filepath}' exists.`,
+            });
+        } else {
+            return res.status(200).json({
+                success: true,
+                exists: false,
+                message: `The file '${filepath}' does not exist.`,
+            });
+        }
+    } catch (error) {
+        console.error('Error checking file existence:', error);
+        return res.status(200).json({
+            success: false,
+            message: 'An error occurred while checking file existence.',
+            error: error.message,
+        });
+    }
+});
