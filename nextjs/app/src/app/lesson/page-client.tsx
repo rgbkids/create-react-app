@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import MyComponent from "./client-components/my-component";
+import Note from "./components/note";
 
 export default function PageClient() {
     return (
         <div>
-            <MyComponent />
+            <Note />
         </div>
     );
 }
