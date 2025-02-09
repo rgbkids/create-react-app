@@ -25,13 +25,18 @@ const allowedOrigins = ['http://localhost:3000', 'https://school.vteacher.biz'];
 
 server.use(cors({
     origin: (origin, callback) => {
-        if (!origin || allowedOrigins.includes(origin)) {
+        if (!origin || allowedOrigins.includes(origin) || /^https:\/\/www\.vteacher\.biz(:\d+)?$/.test(origin)) {
             callback(null, true);
         } else {
             callback(new Error('Not allowed by CORS'));
         }
     },
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true
 }));
+
+server.options('*', cors());
 
 app.prepare().then(() => {
     server.all('*', (req, res) => {
